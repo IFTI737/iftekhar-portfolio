@@ -180,10 +180,12 @@ export type Project = {
   tagline: string;
   category: string;
   image: string;
+  /** Pixel size of the screenshot, so the page can reserve space (and show a skeleton) before it loads. */
+  imageSize: [number, number];
   /** Which part of the screenshot to keep when the card crops it (CSS object-position). */
   imagePosition?: string;
   /** Extra screenshots shown on the details page. */
-  gallery?: { src: string; alt: string; caption: string }[];
+  gallery?: { src: string; alt: string; caption: string; size: [number, number] }[];
   year: string;
   role: string;
   stack: string[];
@@ -203,15 +205,18 @@ export const projects: Project[] = [
     tagline: "An AI digital watcher for the cameras a building already has",
     category: "AI · Computer Vision · Embedded IoT",
     image: "/projects/visionguard.jpg",
+    imageSize: [1192, 611],
     imagePosition: "48% 50%",
     gallery: [
       {
         src: "/projects/visionguard-alerts.jpg",
+        size: [1272, 544],
         alt: "VisionGuard alerts list with risk scores and reasons",
         caption: "Alerts with a risk score and the reasons behind it. Marking each one real or false alarm is how the system learns.",
       },
       {
         src: "/projects/visionguard-telegram.jpg",
+        size: [410, 778],
         alt: "Telegram alert from VisionGuard showing six people in a restricted zone",
         caption: "A real Telegram alert: six people detected inside a restricted zone during restricted hours.",
       },
@@ -258,6 +263,7 @@ export const projects: Project[] = [
     tagline: "Sentiment and emotion analysis for Bangla and Banglish, on models I fine-tuned myself",
     category: "AI · Full-stack",
     image: "/projects/bangla-sentiment.jpg",
+    imageSize: [1550, 746],
     imagePosition: "18% 50%",
     year: "2026",
     role: "Solo developer — models, API and frontend",
@@ -314,6 +320,7 @@ export const projects: Project[] = [
     tagline: "Book creative studios by the hour — photo, film, podcast and music",
     category: "Full-stack web",
     image: "/projects/studiospace.jpg",
+    imageSize: [1550, 648],
     imagePosition: "1% 50%",
     year: "2026",
     role: "Solo developer — client and server",

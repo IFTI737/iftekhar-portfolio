@@ -38,6 +38,15 @@ export default function HeroNetwork() {
     let ox = 0, oy = 0, tox = 0, toy = 0;
     let raf = 0;
     let running = false;
+    // theme colours, read from CSS variables ("r, g, b") and refreshed when the theme changes
+    let cLine = "255,138,61", cDot = "243,239,232", cHot = "61,220,132";
+    const readColors = () => {
+      const cs = getComputedStyle(document.documentElement);
+      cLine = cs.getPropertyValue("--net-line").trim() || cLine;
+      cDot = cs.getPropertyValue("--net-dot").trim() || cDot;
+      cHot = cs.getPropertyValue("--net-hot").trim() || cHot;
+    };
+    readColors();
     let visible = true;
 
     const resize = () => {
@@ -110,10 +119,10 @@ export default function HeroNetwork() {
       }
       ctx.lineWidth = 1;
       for (let b = 0; b < BUCKETS; b++) {
-        ctx.strokeStyle = `rgba(255,138,61,${0.15 - b * 0.033})`;
+        ctx.strokeStyle = `rgba(${cLine},${0.15 - b * 0.033})`;
         ctx.stroke(paths[b]);
       }
-      ctx.strokeStyle = "rgba(61,220,132,0.28)";
+      ctx.strokeStyle = `rgba(${cHot},0.3)`;
       ctx.stroke(near);
 
       // squares
@@ -136,10 +145,10 @@ export default function HeroNetwork() {
           plain.rect(x - half, y - half, n.s, n.s);
         }
       }
-      ctx.strokeStyle = "rgba(243,239,232,0.22)";
+      ctx.strokeStyle = `rgba(${cDot},0.22)`;
       ctx.stroke(plain);
       ctx.lineWidth = 1.4;
-      ctx.strokeStyle = "rgba(61,220,132,0.9)";
+      ctx.strokeStyle = `rgba(${cHot},0.9)`;
       ctx.stroke(hot);
     };
 
@@ -190,6 +199,11 @@ export default function HeroNetwork() {
       else stop();
     });
     io.observe(host);
+    const mo = new MutationObserver(() => {
+      readColors();
+      if (reduce || !running) draw();
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("visibilitychange", onVis);
@@ -199,6 +213,7 @@ export default function HeroNetwork() {
       stop();
       ro.disconnect();
       io.disconnect();
+      mo.disconnect();
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("visibilitychange", onVis);

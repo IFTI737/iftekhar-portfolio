@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { sections, socials } from "@/data/site";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -65,6 +66,7 @@ export default function Navbar() {
           <div className="mono counter" aria-hidden="true">
             <b>{p(active + 1)}</b> / {p(sections.length)}
           </div>
+          <ThemeToggle className="nav-theme" />
           <Link href="/#contact" className="btn btn-primary nav-cta">
             Let&apos;s talk
           </Link>
@@ -89,12 +91,15 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-        <div className="socials">
+        <div className="mm-bottom">
+          <ThemeToggle />
+          <div className="socials">
           {socials.slice(0, 3).map((s) => (
             <a key={s.label} href={s.href} target="_blank" rel="noopener" className="mono muted" style={{ marginRight: 18 }}>
               {s.label}
             </a>
           ))}
+          </div>
         </div>
       </div>
     </>

@@ -12,6 +12,7 @@ import {
 import Clock from "@/components/Clock";
 import HeroNetwork from "@/components/HeroNetwork";
 import Icon from "@/components/Icon";
+import LoadImg from "@/components/LoadImg";
 import Reveal from "@/components/Reveal";
 import ResumeButton from "@/components/ResumeButton";
 import Socials from "@/components/Socials";
@@ -73,10 +74,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={`feed fade-in ${profile.photo ? "has-photo" : ""}`} style={{ animationDelay: ".2s" }}>
+            <div className={`feed fade-in skel ${profile.photo ? "has-photo" : ""}`} style={{ animationDelay: ".2s" }}>
               {profile.photo ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={profile.photo} alt={`Portrait of ${profile.name}`} width={1100} height={1366} fetchPriority="high" />
+                <LoadImg src={profile.photo} alt={`Portrait of ${profile.name}`} width={1100} height={1366} fetchPriority="high" />
               ) : (
                 <div className="placeholder">
                   <div>
@@ -106,9 +106,8 @@ export default function Home() {
           <div className="about-grid">
             <Reveal className="about-side">
               {profile.aboutPhoto && (
-                <figure className="about-photo">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={profile.aboutPhoto} alt={`${profile.name}, off the clock`} width={900} height={1125} loading="lazy" />
+                <figure className="about-photo skel">
+                  <LoadImg src={profile.aboutPhoto} alt={`${profile.name}, off the clock`} width={900} height={1125} loading="lazy" />
                 </figure>
               )}
               <dl className="facts">
@@ -230,9 +229,8 @@ export default function Home() {
           />
           <div className="deck">
             {projects.map((p) => (
-              <Link key={p.slug} href={`/projects/${p.slug}`} className="pcard" data-cursor="view" aria-label={`${p.name} — view details`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.image} alt={`${p.name} preview`} loading="lazy" style={{ objectPosition: p.imagePosition }} />
+              <Link key={p.slug} href={`/projects/${p.slug}`} className="pcard skel" data-cursor="view" aria-label={`${p.name} — view details`}>
+                <LoadImg src={p.image} alt={`${p.name} preview`} width={p.imageSize[0]} height={p.imageSize[1]} loading="lazy" style={{ objectPosition: p.imagePosition }} />
                 <div className="tint" />
                 <div className="shade" />
                 <div className="top">

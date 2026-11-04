@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/site";
 import Icon from "@/components/Icon";
+import LoadImg from "@/components/LoadImg";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -42,17 +43,17 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       </div>
       {!p.repo && p.repoNote && <p className="note">{p.repoNote}</p>}
 
-      <div className="pd-cover">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={p.image} alt={`${p.name} preview`} />
+      <div className="pd-cover skel">
+        <LoadImg src={p.image} alt={`${p.name} preview`} width={p.imageSize[0]} height={p.imageSize[1]} fetchPriority="high" />
       </div>
 
       {p.gallery && p.gallery.length > 0 && (
         <div className="pd-gallery">
           {p.gallery.map((g) => (
             <figure key={g.src}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={g.src} alt={g.alt} loading="lazy" />
+              <div className="skel pd-shot">
+                <LoadImg src={g.src} alt={g.alt} width={g.size[0]} height={g.size[1]} loading="lazy" />
+              </div>
               <figcaption>{g.caption}</figcaption>
             </figure>
           ))}
