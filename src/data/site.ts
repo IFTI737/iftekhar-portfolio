@@ -314,7 +314,7 @@ export const projects: Project[] = [
     tagline: "Book creative studios by the hour — photo, film, podcast and music",
     category: "Full-stack web",
     image: "/projects/studiospace.jpg",
-    imagePosition: "15% 50%",
+    imagePosition: "1% 50%",
     year: "2026",
     role: "Solo developer — client and server",
     stack: [
