@@ -9,7 +9,7 @@ export const profile = {
   shortName: "Iftekhar",
   nickname: "Ifti",
   designation: "Full-Stack Web Developer",
-  secondary: "Applied AI & Computer Vision",
+  secondary: "Applied ML, Computer Vision & Embedded IoT",
   location: "Dhaka, Bangladesh",
   timezone: "Asia/Dhaka",
   status: "Open to internships",
@@ -17,6 +17,8 @@ export const profile = {
     "I build full-stack web apps with Next.js, NestJS and MongoDB/PostgreSQL, and I pair them with applied deep learning. Right now I'm turning ordinary building cameras into an AI security system.",
   // Put your photo at /public/me.jpg and change this to "/me.jpg"
   photo: "/me-web.jpg" as string | null,
+  // Casual photo shown in the About section
+  aboutPhoto: "/me-casual.jpg" as string | null,
   // Put your resume at /public/resume.pdf and set resumeReady to true
   resume: "/resume.pdf",
   resumeReady: true,
@@ -86,8 +88,8 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
     ],
   },
   {
-    title: "AI / Computer Vision",
-    blurb: "Models that see and explain",
+    title: "Applied ML, Vision & IoT",
+    blurb: "Models that see, running on the edge",
     skills: [
       { name: "Python", level: 4 },
       { name: "PyTorch", level: 4 },
@@ -96,6 +98,7 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "TensorFlow", level: 3 },
       { name: "OpenCV", level: 4 },
       { name: "scikit-learn", level: 3 },
+      { name: "Arduino / ESP32", level: 3 },
     ],
   },
   {
@@ -109,7 +112,6 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "WebRTC", level: 3 },
       { name: "Docker", level: 2 },
       { name: "Linux", level: 3 },
-      { name: "Arduino / ESP32", level: 3 },
     ],
   },
 ];
@@ -144,27 +146,9 @@ export const experience = [
     org: "Grameenphone Future Maker 2026 · Semi-finalist",
     period: "2026",
     points: [
-      "Pitched VisionGuard, an AI CCTV security platform that plugs into a building's existing cameras.",
-      "Built the prototype: in-browser YOLOv8n person detection, owner-drawn zones, a rule-based risk score and Telegram alerts.",
-      "Designing the next step — a gateway with Frigate NVR, go2rtc and MQTT to reach real DVR/NVR cameras.",
-    ],
-  },
-  {
-    role: "Researcher — Urban Waste Detection with Explainable AI",
-    org: "Paper submitted to ICCA 2026",
-    period: "2026",
-    points: [
-      "Collected and labeled a ~12,000-image, 9-class waste dataset in Bangladesh (YOLO and COCO formats).",
-      "Trained YOLO26, RT-DETR-L and Faster R-CNN — RT-DETR-L performed best at ~83.4% mAP@0.50.",
-      "Used confusion matrices, Grad-CAM++ and Eigen-CAM to find weak classes and false positives.",
-    ],
-  },
-  {
-    role: "Researcher — Brinjal Fruit Disease Classification",
-    org: "Paper in progress",
-    period: "2026",
-    points: [
-      "Benchmarked 7 CNN backbones and a fusion hybrid on BrinjalFruitX — 91.26% accuracy against an 80.0% baseline.",
+      "Designed and built VisionGuard, an AI CCTV security system that plugs into a building's existing cameras — the project that took our team to the semi-finals of Grameenphone Future Maker 2026.",
+      "Built the working prototype: in-browser YOLOv8n person detection, owner-drawn zones, a rule-based risk score and Telegram alerts.",
+      "Now building the edge gateway with Frigate NVR, go2rtc and MQTT to connect real DVR/NVR cameras.",
     ],
   },
   {
@@ -196,6 +180,10 @@ export type Project = {
   tagline: string;
   category: string;
   image: string;
+  /** Which part of the screenshot to keep when the card crops it (CSS object-position). */
+  imagePosition?: string;
+  /** Extra screenshots shown on the details page. */
+  gallery?: { src: string; alt: string; caption: string }[];
   year: string;
   role: string;
   stack: string[];
@@ -213,8 +201,21 @@ export const projects: Project[] = [
     slug: "visionguard",
     name: "VisionGuard",
     tagline: "An AI digital watcher for the cameras a building already has",
-    category: "AI security",
-    image: "/projects/visionguard.svg",
+    category: "AI · Computer Vision · Embedded IoT",
+    image: "/projects/visionguard.jpg",
+    imagePosition: "48% 50%",
+    gallery: [
+      {
+        src: "/projects/visionguard-alerts.jpg",
+        alt: "VisionGuard alerts list with risk scores and reasons",
+        caption: "Alerts with a risk score and the reasons behind it. Marking each one real or false alarm is how the system learns.",
+      },
+      {
+        src: "/projects/visionguard-telegram.jpg",
+        alt: "Telegram alert from VisionGuard showing six people in a restricted zone",
+        caption: "A real Telegram alert: six people detected inside a restricted zone during restricted hours.",
+      },
+    ],
     year: "2026",
     role: "Team lead, architecture & frontend",
     stack: ["Next.js", "TypeScript", "YOLOv8n", "ONNX Runtime Web", "WebRTC", "Telegram Bot API", "Vercel"],
@@ -256,7 +257,8 @@ export const projects: Project[] = [
     name: "Bangla Sentiment Pro",
     tagline: "Sentiment and emotion analysis for Bangla and Banglish, on models I fine-tuned myself",
     category: "AI · Full-stack",
-    image: "/projects/bangla-sentiment.svg",
+    image: "/projects/bangla-sentiment.jpg",
+    imagePosition: "18% 50%",
     year: "2026",
     role: "Solo developer — models, API and frontend",
     stack: [
@@ -311,7 +313,8 @@ export const projects: Project[] = [
     name: "StudioSpace",
     tagline: "Book creative studios by the hour — photo, film, podcast and music",
     category: "Full-stack web",
-    image: "/projects/studiospace.svg",
+    image: "/projects/studiospace.jpg",
+    imagePosition: "15% 50%",
     year: "2026",
     role: "Solo developer — client and server",
     stack: [

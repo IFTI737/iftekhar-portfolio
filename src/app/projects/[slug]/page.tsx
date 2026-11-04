@@ -47,6 +47,18 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         <img src={p.image} alt={`${p.name} preview`} />
       </div>
 
+      {p.gallery && p.gallery.length > 0 && (
+        <div className="pd-gallery">
+          {p.gallery.map((g) => (
+            <figure key={g.src}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={g.src} alt={g.alt} loading="lazy" />
+              <figcaption>{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+
       <div className="pd-meta">
         <div><small>Role</small>{p.role}</div>
         <div><small>Year</small>{p.year}</div>

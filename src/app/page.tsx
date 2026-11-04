@@ -10,6 +10,7 @@ import {
   skillGroups,
 } from "@/data/site";
 import Clock from "@/components/Clock";
+import HeroNetwork from "@/components/HeroNetwork";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
 import ResumeButton from "@/components/ResumeButton";
@@ -35,6 +36,7 @@ export default function Home() {
       {/* ── HERO ── */}
       <section id="home" className="hero">
         <div className="hero-glow" />
+        <HeroNetwork />
         <div className="wrap" style={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <div className="meta-row mono">
             <Clock mode="timecode" />
@@ -87,8 +89,11 @@ export default function Home() {
               <div className="corner c1" /><div className="corner c2" />
               <div className="corner c3" /><div className="corner c4" />
               <div className="hud top mono"><span>CAM 01 · DHAKA</span><span>1080p</span></div>
-              <div className="bbox"><span>person 0.99 · iftekhar</span></div>
-              <div className="hud bottom mono"><span>VisionGuard</span><span>● LIVE</span></div>
+              {!profile.photo && <div className="bbox"><span>person 0.99 · iftekhar</span></div>}
+              <div className="hud bottom mono">
+                <span>VisionGuard</span>
+                <span className="live"><i />LIVE</span>
+              </div>
             </div>
           </div>
         </div>
@@ -99,8 +104,13 @@ export default function Home() {
         <div className="wrap">
           <SectionHead n="02" label="About me" title="A builder who likes real problems." />
           <div className="about-grid">
-            <Reveal>
-              <p className="statement">{about.statement}</p>
+            <Reveal className="about-side">
+              {profile.aboutPhoto && (
+                <figure className="about-photo">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={profile.aboutPhoto} alt={`${profile.name}, off the clock`} width={900} height={1125} loading="lazy" />
+                </figure>
+              )}
               <dl className="facts">
                 {about.facts.map((f) => (
                   <div key={f.k}>
@@ -111,6 +121,7 @@ export default function Home() {
               </dl>
             </Reveal>
             <Reveal className="about-body" delay={120}>
+              <p className="statement">{about.statement}</p>
               <h3>My journey</h3>
               {about.journey.map((p, i) => <p key={i}>{p}</p>)}
               <h3>The work I enjoy</h3>
@@ -221,7 +232,7 @@ export default function Home() {
             {projects.map((p) => (
               <Link key={p.slug} href={`/projects/${p.slug}`} className="pcard" data-cursor="view" aria-label={`${p.name} — view details`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.image} alt={`${p.name} preview`} />
+                <img src={p.image} alt={`${p.name} preview`} loading="lazy" style={{ objectPosition: p.imagePosition }} />
                 <div className="tint" />
                 <div className="shade" />
                 <div className="top">
