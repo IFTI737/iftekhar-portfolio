@@ -376,3 +376,11 @@ body::after {
   .reveal { opacity: 1; transform: none; }
 }
 .hide-sm{} @media (max-width:640px){.hide-sm{display:none}}
+
+/* hero photo: fit the detection box to the face */
+.feed.has-photo .bbox { left: 32%; right: 30%; top: 23%; bottom: 31%; }
+.feed.has-photo .scan { opacity: .6; }
+@media (max-width: 900px) {
+  .feed.has-photo img { object-position: center 20%; }
+  .feed.has-photo .bbox { top: 27%; bottom: 25%; }
+}

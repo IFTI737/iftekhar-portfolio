@@ -71,10 +71,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="feed fade-in" style={{ animationDelay: ".2s" }}>
+            <div className={`feed fade-in ${profile.photo ? "has-photo" : ""}`} style={{ animationDelay: ".2s" }}>
               {profile.photo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={profile.photo} alt={`Portrait of ${profile.name}`} />
+                <img src={profile.photo} alt={`Portrait of ${profile.name}`} width={1100} height={1366} fetchPriority="high" />
               ) : (
                 <div className="placeholder">
                   <div>

@@ -16,7 +16,7 @@ export const profile = {
   intro:
     "I build full-stack web apps with Next.js, NestJS and MongoDB/PostgreSQL, and I pair them with applied deep learning. Right now I'm turning ordinary building cameras into an AI security system.",
   // Put your photo at /public/me.jpg and change this to "/me.jpg"
-  photo: null as string | null,
+  photo: "/me-web.jpg" as string | null,
   // Put your resume at /public/resume.pdf and set resumeReady to true
   resume: "/resume.pdf",
   resumeReady: true,
