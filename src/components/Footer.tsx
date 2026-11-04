@@ -7,12 +7,19 @@ import Icon from "./Icon";
 
 export default function Footer() {
   const giant = useRef<HTMLDivElement>(null);
+  const frame = useRef(0);
   const onMove = (e: React.PointerEvent) => {
-    const el = giant.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    const cx = e.clientX;
+    const cy = e.clientY;
+    if (frame.current) return; // at most one update per frame
+    frame.current = requestAnimationFrame(() => {
+      frame.current = 0;
+      const el = giant.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${cx - r.left}px`);
+      el.style.setProperty("--my", `${cy - r.top}px`);
+    });
   };
   return (
     <footer className="footer" onPointerMove={onMove}>
