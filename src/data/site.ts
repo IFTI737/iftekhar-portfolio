@@ -42,7 +42,7 @@ export const socials = [
 
 export const about = {
   statement:
-    "I like software that fixes a real problem for a real person — a shopper checking the price of rice, or a family that wants to know their building is safe.",
+    "I like software that fixes a real problem for a real person — someone writing in Bangla that most AI tools ignore, or a family that wants to know their building is safe.",
   journey: [
     "My programming journey started when I joined Computer Science and Engineering at AIUB in 2023. C, C++, Java and C# taught me the fundamentals, and building for the web turned into my main craft.",
     "I went from HTML, CSS and JavaScript to React and Next.js, then to the backend with Node.js, Express and NestJS, backed by MongoDB and PostgreSQL. Along the way I fell into computer vision — collecting my own datasets, training detectors on Kaggle, and running models right in the browser. Now I'm in my final semester with a 3.79 CGPA, and only my internship and thesis left.",
@@ -177,16 +177,16 @@ export const experience = [
 
 export const research = [
   {
-    title: "Bangla Sentiment Pro",
-    text: "Fine-tuned BanglaBERT for Bangla sentiment (~91%) and emotion (~70%), plus XLM-RoBERTa for Banglish, served with FastAPI on Hugging Face Spaces.",
-  },
-  {
     title: "Face Verification Door Lock",
     text: "Real-time YuNet + SFace face verification with blur and landmark checks, sending grant/deny to an Arduino servo lock.",
   },
   {
     title: "Smart Crop Recommendation",
     text: "An ML model that recommends crops from soil and weather readings, served through a FastAPI backend built for ESP32 sensors.",
+  },
+  {
+    title: "Gene-Expression Thesis",
+    text: "Machine learning on gene-expression data to tell autoimmune disease apart from healthy samples and find useful biomarkers.",
   },
 ];
 
@@ -252,79 +252,113 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "bazardor",
-    name: "BazarDor (বাজার দর)",
-    tagline: "Daily market prices of everyday essentials, in Bangla",
-    category: "Full-stack web",
-    image: "/projects/bazardor.svg",
+    slug: "bangla-sentiment-pro",
+    name: "Bangla Sentiment Pro",
+    tagline: "Sentiment and emotion analysis for Bangla and Banglish, on models I fine-tuned myself",
+    category: "AI · Full-stack",
+    image: "/projects/bangla-sentiment.svg",
     year: "2026",
-    role: "Solo developer",
-    stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "daisyUI 5", "Better Auth", "MongoDB", "Vercel"],
-    description:
-      "BazarDor is a Bengali-first market-price tracker for rice, lentils, oil, vegetables, fish, meat, eggs, dairy and spices. It compares prices across 12 bazars, shows today's biggest risers and fallers, and lets signed-in users open detailed product pages with lowest, highest and average prices against yesterday, last week and last month.",
-    features: [
-      "Live price ticker under the navbar that pauses on hover",
-      "Today's price movers, colour-coded up, down and unchanged",
-      "Price comparison across 12 markets with historic changes",
-      "Email/password, Google and GitHub sign-in with protected routes",
-      "Search by Bangla name, category sorting with Bengali digits, light/dark mode",
+    role: "Solo developer — models, API and frontend",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "FastAPI",
+      "Hugging Face Transformers",
+      "PyTorch",
+      "Docker (HF Spaces)",
+      "Vercel",
     ],
-    live: "https://bazar-dor-2-0-ifti.vercel.app/",
-    repo: "https://github.com/IFTI737/bazar-dor-2.0-ifti",
+    description:
+      "People in Bangladesh write in Bangla script (আমি খুব খুশি) and in Banglish — Bangla typed with English letters (ami khub khushi). Most sentiment tools are trained on English and miss both. Bangla Sentiment Pro detects the script, sends the text to a model trained for it, and returns the tone, six emotion scores, and the words that carried them. It runs on three transformer models I fine-tuned: a Bangla sentiment model, a BanglaBERT emotion model, and an XLM-RoBERTa model for Banglish.",
+    features: [
+      "Analyze one sentence: sentiment, all six emotion scores and word highlighting",
+      "Mood journal: write message by message and watch a chart follow the mood",
+      "Bulk CSV: up to 2,000 rows with charts, filters and a labelled CSV download",
+      "YouTube: paste a video link and analyze its top comments",
+      "Voice input, dark/light themes, and a live API playground with cURL, JavaScript and Python",
+    ],
+    live: "https://bangla-sentiment-pro-psi.vercel.app",
+    repo: "https://github.com/IFTI737/bangla-sentiment-pro",
     challenges: [
       {
-        title: "Sorting Bengali numbers",
-        text: "Prices arrive as Bengali digits (৳১২০), which sort as text by default. I converted them to numeric values before sorting so low-to-high actually works.",
+        title: "Two scripts, one input box",
+        text: "The same person types Bangla and Banglish. I count Bangla vs Roman letters to route each text to the right model, and reject evenly mixed text with a clear message instead of guessing.",
       },
       {
-        title: "An API that can go down",
-        text: "To stop a slow API from breaking the site, requests time out after 8 seconds and fall back to two backup APIs before showing a friendly Bangla message.",
+        title: "A free backend that falls asleep",
+        text: "Free Hugging Face Spaces sleep after 48 hours, and waking means reloading three models. I keep it awake with three light pings to /health — GitHub Actions, Vercel Cron and a browser heartbeat — so one can fail safely.",
       },
       {
-        title: "Auth on the newest Next.js",
-        text: "Wiring Better Auth with MongoDB into Next.js 16 with Cache Components meant learning the new proxy and making sure protected pages return users to where they were going.",
+        title: "Models that miss obvious phrases",
+        text: "A keyword rule layer corrects clear misses like \"মন ভালো নেই\", using word boundaries so \"dar\" never fires inside \"darun\", and the API says when a rule changed the result.",
+      },
+      {
+        title: "Showing why the model decided",
+        text: "To explain a result, each word is removed in turn and the model runs again; the drop in probability shows how much that word mattered.",
       },
     ],
     future: [
-      "Price history charts for each product",
-      "Price alerts when an item drops below a set amount",
-      "Let market volunteers submit verified daily prices",
-      "Add more districts beyond Dhaka",
+      "A dedicated Banglish sentiment model (today it is derived from emotions)",
+      "A Postgres database for shared corrections and public usage stats",
+      "Retrain with the corrections users export from the \"Result looks wrong?\" flow",
+      "Automatic sync of the backend to the Hugging Face Space on every push",
     ],
   },
   {
-    slug: "dev-stack",
-    name: "Dev Stack",
-    tagline: "Explore technologies and build your own tech stack",
-    category: "Frontend",
-    image: "/projects/devstack.svg",
+    slug: "studiospace",
+    name: "StudioSpace",
+    tagline: "Book creative studios by the hour — photo, film, podcast and music",
+    category: "Full-stack web",
+    image: "/projects/studiospace.svg",
     year: "2026",
-    role: "Solo developer",
-    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "daisyUI", "React Toastify", "Netlify"],
-    description:
-      "Dev Stack is a React app for exploring development technologies and putting together a personal stack. Each card shows a technology's category, description, difficulty and rating. Add one to your stack, remove it, or clear everything — and the app warns you if you try to add the same thing twice.",
-    features: [
-      "Technology cards with category, difficulty, rating and badge",
-      "Add, remove or clear your stack with a live count",
-      "Duplicate detection with toast notifications",
-      "Responsive grid: three columns on desktop, two on tablet, one on mobile",
+    role: "Solo developer — client and server",
+    stack: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "shadcn/ui",
+      "Better Auth",
+      "JWT (jose)",
+      "Express 5",
+      "MongoDB",
+      "Vercel",
     ],
-    live: "https://dev-stack-by-ifti.netlify.app/",
-    repo: "https://github.com/IFTI737/Dev-Stack",
+    description:
+      "StudioSpace is a peer-to-peer marketplace where photographers, filmmakers, podcasters and musicians discover and book creative studios by the hour, and hosts list and manage their spaces. Visitors explore and filter studios, book from a modal with live price calculation, and hosts confirm, decline or complete each booking.",
+    features: [
+      "Explore by category, search by name or location, sort by price, rating or newest",
+      "Hourly booking with live price calculation and double-booking prevention",
+      "Full host CRUD with image upload, gallery and amenity tags",
+      "Reviews and ratings, a saved-studios wishlist and PDF invoices for confirmed bookings",
+      "Better Auth (email/password + Google) with JWT-protected API routes",
+    ],
+    live: "https://studiospace-client-nu.vercel.app",
+    repo: "https://github.com/IFTI737/studiospace-client",
     challenges: [
       {
-        title: "Loading data without useEffect",
-        text: "I loaded the JSON data with fetch, React's use() and Suspense instead of useEffect, which meant rethinking how loading states work.",
+        title: "Stopping double bookings",
+        text: "Before saving a booking, the server runs a MongoDB time-overlap query against existing bookings and returns a clear error on a clash, so two people can't book the same studio hour.",
       },
       {
-        title: "Keeping shared state simple",
-        text: "The stack lives in the parent component and flows down through props, so the list and the stack panel always agree without a state library.",
+        title: "Auth across two apps",
+        text: "Better Auth issues tokens on the Next.js client; the separate Express server verifies them with jose against the client's JWKS and answers 401 when a token is missing or invalid.",
+      },
+      {
+        title: "Private routes that survive a reload",
+        text: "Dashboard, listings and bookings pages had to wait for the session before deciding, so a logged-in user isn't kicked to the login page on refresh.",
+      },
+      {
+        title: "Keeping ratings correct",
+        text: "Each new review recalculates the studio's average with a MongoDB aggregation pipeline update, so the rating never drifts from the real reviews.",
       },
     ],
     future: [
-      "Save stacks to an account with a backend",
-      "Share a stack with a public link",
-      "Filter and search technologies by category and difficulty",
+      "Online payments for confirmed bookings",
+      "A calendar view of each studio's availability",
+      "Email notifications when a booking is confirmed or declined",
+      "Host analytics: earnings and busiest hours",
     ],
   },
 ];
