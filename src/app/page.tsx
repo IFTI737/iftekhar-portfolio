@@ -6,6 +6,7 @@ import {
   levelLabel,
   profile,
   projects,
+  references,
   research,
   skillGroups,
 } from "@/data/site";
@@ -193,7 +194,7 @@ export default function Home() {
             n="05"
             label="Experience"
             title="What I've done."
-            lede="Hackathons, research and hands-on training — the work that taught me the most."
+            lede="Competitions, research and hands-on training — the work that taught me the most."
           />
           <div className="timeline">
             {experience.map((x) => (
@@ -207,13 +208,29 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="research">
-            {research.map((r) => (
-              <div key={r.title}>
-                <h4>{r.title}</h4>
-                <p>{r.text}</p>
-              </div>
-            ))}
+          <Reveal>
+            <h3 className="sub-head">Research</h3>
+            <div className="research">
+              {research.map((r) => (
+                <div key={r.title}>
+                  <h4>{r.title}</h4>
+                  <p>{r.text}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal>
+            <h3 className="sub-head">References</h3>
+            <div className="refs">
+              {references.map((ref) => (
+                <div key={ref.name}>
+                  <h4>{ref.name}</h4>
+                  <p className="ref-role">{ref.role}</p>
+                  <p className="ref-org">{ref.org}</p>
+                </div>
+              ))}
+            </div>
+            <p className="note">Contact details for references are available on request.</p>
           </Reveal>
         </div>
       </section>

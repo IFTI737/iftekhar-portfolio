@@ -10,7 +10,7 @@ const OPTIONS: { value: ThemePref; label: string; icon: string }[] = [
 ];
 
 export default function ThemeToggle({ className = "" }: { className?: string }) {
-  const [pref, setPref] = useState<ThemePref>("auto");
+  const [pref, setPref] = useState<ThemePref>("dark");
 
   // read what the head script applied
   useEffect(() => {

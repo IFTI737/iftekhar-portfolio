@@ -40,6 +40,11 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <Icon name="github" /> GitHub (client)
           </a>
         ) : null}
+        {p.extraLinks?.map((l) => (
+          <a key={l.href} className="btn btn-ghost" href={l.href} target="_blank" rel="noopener">
+            {l.label}
+          </a>
+        ))}
       </div>
       {!p.repo && p.repoNote && <p className="note">{p.repoNote}</p>}
 

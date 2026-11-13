@@ -8,13 +8,13 @@ export const profile = {
   name: "Iftekhar Bin Shoib",
   shortName: "Iftekhar",
   nickname: "Ifti",
-  designation: "Full-Stack Web Developer",
-  secondary: "Applied ML, Computer Vision & Embedded IoT",
+  designation: "Full-Stack & AI Developer",
+  secondary: "Computer Vision, NLP & Scalable Web Systems",
   location: "Dhaka, Bangladesh",
   timezone: "Asia/Dhaka",
   status: "Open to internships",
   intro:
-    "I build full-stack web apps with Next.js, NestJS and MongoDB/PostgreSQL, and I pair them with applied deep learning. Right now I'm turning ordinary building cameras into an AI security system.",
+    "I build and deploy complete products, from web backends and live apps to the AI models behind them. Creator of VisionGuard, a real-time AI security platform that turns existing CCTV cameras into a proactive watcher.",
   // Put your photo at /public/me.jpg and change this to "/me.jpg"
   photo: "/me-web.jpg" as string | null,
   // Casual photo shown in the About section
@@ -35,7 +35,7 @@ export const socials = [
   { label: "GitHub", href: "https://github.com/IFTI737", icon: "github" },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/iftekhar-bin-shoib-7570082a6",
+    href: "https://www.linkedin.com/in/iftekhar-bin-shoib",
     icon: "linkedin",
   },
   { label: "WhatsApp", href: `https://wa.me/${contact.whatsapp}`, icon: "whatsapp" },
@@ -47,7 +47,7 @@ export const about = {
     "I like software that fixes a real problem for a real person — someone writing in Bangla that most AI tools ignore, or a family that wants to know their building is safe.",
   journey: [
     "My programming journey started when I joined Computer Science and Engineering at AIUB in 2023. C, C++, Java and C# taught me the fundamentals, and building for the web turned into my main craft.",
-    "I went from HTML, CSS and JavaScript to React and Next.js, then to the backend with Node.js, Express and NestJS, backed by MongoDB and PostgreSQL. Along the way I fell into computer vision — collecting my own datasets, training detectors on Kaggle, and running models right in the browser. Now I'm in my final semester with a 3.79 CGPA, and only my internship and thesis left.",
+    "I went from HTML, CSS and JavaScript to React and Next.js, then to the backend with Node.js, Express and NestJS, backed by MongoDB and PostgreSQL. Along the way I fell into computer vision — collecting my own datasets, training detectors on Kaggle, and running models right in the browser. Now I'm in my final semester with a 3.79 CGPA and Dean's List Honors, with only my internship remaining.",
   ],
   work: "The work I enjoy most sits where a clean interface meets a system doing something clever underneath: authentication and protected routes, APIs with sensible fallbacks, Bengali-first interfaces, and computer vision models that turn camera feeds into useful alerts. I like shipping a working version fast, then making it solid.",
   outside:
@@ -94,8 +94,9 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "Python", level: 4 },
       { name: "PyTorch", level: 4 },
       { name: "YOLO / RT-DETR", level: 4 },
+      { name: "Hugging Face Transformers", level: 4 },
       { name: "ONNX Runtime (browser)", level: 3 },
-      { name: "TensorFlow", level: 3 },
+      { name: "Explainable AI (Grad-CAM++)", level: 3 },
       { name: "OpenCV", level: 4 },
       { name: "scikit-learn", level: 3 },
       { name: "Arduino / ESP32", level: 3 },
@@ -109,9 +110,10 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "Vercel / Netlify", level: 5 },
       { name: "VS Code", level: 5 },
       { name: "Kaggle (multi-GPU)", level: 4 },
+      { name: "Hugging Face Spaces", level: 4 },
+      { name: "Docker", level: 3 },
       { name: "WebRTC", level: 3 },
-      { name: "Docker", level: 2 },
-      { name: "Linux", level: 3 },
+      { name: "Figma", level: 3 },
     ],
   },
 ];
@@ -124,7 +126,7 @@ export const education = [
     school: "American International University-Bangladesh (AIUB)",
     period: "2023 – Present",
     detail:
-      "CGPA 3.79/4.00 with Dean's List Honors. Final semester — only the internship and thesis remain. Thesis on machine learning for gene-expression analysis in autoimmune disease.",
+      "CGPA 3.79/4.00 with Dean's List Honors. Final semester (internship remaining).",
   },
   {
     degree: "Higher Secondary Certificate (Science)",
@@ -142,18 +144,26 @@ export const education = [
 
 export const experience = [
   {
-    role: "Team lead & developer — VisionGuard",
+    role: "Creator & team lead — VisionGuard",
     org: "Grameenphone Future Maker 2026 · Semi-finalist",
     period: "2026",
     points: [
-      "Designed and built VisionGuard, an AI CCTV security system that plugs into a building's existing cameras — the project that took our team to the semi-finals of Grameenphone Future Maker 2026.",
-      "Built the working prototype: in-browser YOLOv8n person detection, owner-drawn zones, a rule-based risk score and Telegram alerts.",
-      "Now building the edge gateway with Frigate NVR, go2rtc and MQTT to connect real DVR/NVR cameras.",
+      "Designed and built VisionGuard, a real-time AI CCTV security platform that plugs into a building's existing cameras — the project that took our team to the semi-finals of Grameenphone Future Maker 2026.",
+      "It weighs context — who, what, where and when — and alerts only on real risk: in-browser YOLOv8n person detection, owner-drawn restricted zones and hours, dynamic risk scoring, Telegram snapshot alerts and live WebRTC streaming.",
+    ],
+  },
+  {
+    role: "AI-Driven Full-Stack Web Development",
+    org: "Programming Hero · In progress, expected Dec 2026",
+    period: "2026",
+    points: [
+      "Hands-on course covering HTML, CSS, JavaScript, React, Next.js, TypeScript, Express and MongoDB.",
+      "Built StudioSpace (client and server) and Dev Stack as course projects.",
     ],
   },
   {
     role: "Dean's Award (Dean's List Honors)",
-    org: "AIUB",
+    org: "American International University-Bangladesh (AIUB)",
     period: "2023–24",
     points: ["Awarded for a 3.84/4.00 GPA in the Spring 2023–2024 semester."],
   },
@@ -161,16 +171,30 @@ export const experience = [
 
 export const research = [
   {
-    title: "Face Verification Door Lock",
-    text: "Real-time YuNet + SFace face verification with blur and landmark checks, sending grant/deny to an Arduino servo lock.",
+    title: "Urban Waste Detection with Explainable AI",
+    text: "Curated and annotated a ~12,000-image, 9-class waste dataset in Bangladesh; benchmarked YOLO26, RT-DETR-L and Faster R-CNN (best: RT-DETR-L, ~83.4% mAP@0.50) and explained model errors with Grad-CAM++ and Eigen-CAM.",
   },
   {
-    title: "Smart Crop Recommendation",
-    text: "An ML model that recommends crops from soil and weather readings, served through a FastAPI backend built for ESP32 sensors.",
+    title: "Brinjal Fruit Disease Classification",
+    text: "Benchmarked 7 CNN backbones and a custom fusion hybrid on BrinjalFruitX in PyTorch, reaching 91.26% accuracy against an 80.0% baseline.",
   },
   {
-    title: "Gene-Expression Thesis",
-    text: "Machine learning on gene-expression data to tell autoimmune disease apart from healthy samples and find useful biomarkers.",
+    title: "Smart Crop Recommendation (Fall 2025)",
+    text: "An ML model that recommends crops for Bangladesh from soil and weather inputs, served through a FastAPI backend designed for ESP32 sensor data.",
+  },
+];
+
+/** People who agreed to be references. Contact details are shared on request, not published. */
+export const references = [
+  {
+    name: "Md. Alamgir Jalil",
+    role: "Lead Specialist – Collection & Credit Management",
+    org: "Product, Partnerships & Ops, Business Division · Grameenphone Ltd.",
+  },
+  {
+    name: "Dipta Justin Gomes",
+    role: "Assistant Professor, Department of Computer Science",
+    org: "Special Assistant, Ranking and Global Engagement Office · AIUB",
   },
 ];
 
@@ -194,6 +218,8 @@ export type Project = {
   live: string;
   repo: string | null;
   repoNote?: string;
+  /** Extra buttons on the details page, e.g. API docs or the server repo. */
+  extraLinks?: { label: string; href: string }[];
   challenges: { title: string; text: string }[];
   future: string[];
 };
@@ -222,10 +248,10 @@ export const projects: Project[] = [
       },
     ],
     year: "2026",
-    role: "Team lead, architecture & frontend",
+    role: "Creator & team lead — architecture and frontend",
     stack: ["Next.js", "TypeScript", "YOLOv8n", "ONNX Runtime Web", "WebRTC", "Telegram Bot API", "Vercel"],
     description:
-      "VisionGuard turns the ordinary CCTV cameras of a residential building into intelligent security and safety monitoring. It plugs into the building's existing DVR/NVR, so residents change nothing about their setup — they only connect their system. Instead of plain motion alerts, it warns the owner only when the risk is real, using context: who, what, where and when. It was a semi-finalist at Grameenphone Future Maker 2026.",
+      "VisionGuard is a real-time, proactive CCTV intelligence platform that turns the ordinary cameras of a residential building into intelligent security and safety monitoring. It plugs into the building's existing DVR/NVR, so residents change nothing about their setup — they only connect their system. Instead of plain motion alerts, it warns the owner only when the risk is real, using context: who, what, where and when. It was a semi-finalist at Grameenphone Future Maker 2026.",
     features: [
       "Person detection with YOLOv8n running right in the browser through ONNX Runtime",
       "Owner-drawn polygon zones with restricted hours",
@@ -234,8 +260,7 @@ export const projects: Project[] = [
       "Areas, alerts and settings, with setup import/export",
     ],
     live: "https://visionguard-ui-three.vercel.app/",
-    repo: null,
-    repoNote: "The source code is private for now while VisionGuard is in competition.",
+    repo: "https://github.com/IFTI737/visionguard-ui",
     challenges: [
       {
         title: "Zero-change installation",
@@ -279,7 +304,7 @@ export const projects: Project[] = [
       "Vercel",
     ],
     description:
-      "People in Bangladesh write in Bangla script (আমি খুব খুশি) and in Banglish — Bangla typed with English letters (ami khub khushi). Most sentiment tools are trained on English and miss both. Bangla Sentiment Pro detects the script, sends the text to a model trained for it, and returns the tone, six emotion scores, and the words that carried them. It runs on three transformer models I fine-tuned: a Bangla sentiment model, a BanglaBERT emotion model, and an XLM-RoBERTa model for Banglish.",
+      "People in Bangladesh write in Bangla script (আমি খুব খুশি) and in Banglish — Bangla typed with English letters (ami khub khushi). Most sentiment tools are trained on English and miss both. Bangla Sentiment Pro detects the script, sends the text to a model trained for it, and returns the tone, six emotion scores, and the words that carried them. It runs on three transformer models I fine-tuned — BERT for Bangla sentiment (~91% accuracy), BanglaBERT for six-class Bangla emotion (~70%) and XLM-RoBERTa for Banglish emotion (~62%) — with word-level explanations.",
     features: [
       "Analyze one sentence: sentiment, all six emotion scores and word highlighting",
       "Mood journal: write message by message and watch a chart follow the mood",
@@ -289,6 +314,7 @@ export const projects: Project[] = [
     ],
     live: "https://bangla-sentiment-pro-psi.vercel.app",
     repo: "https://github.com/IFTI737/bangla-sentiment-pro",
+    extraLinks: [{ label: "API docs", href: "https://iftekhar737-bangla-backend.hf.space/docs" }],
     challenges: [
       {
         title: "Two scripts, one input box",
@@ -346,6 +372,7 @@ export const projects: Project[] = [
     ],
     live: "https://studiospace-client-nu.vercel.app",
     repo: "https://github.com/IFTI737/studiospace-client",
+    extraLinks: [{ label: "Server repo", href: "https://github.com/IFTI737/studiospace-server" }],
     challenges: [
       {
         title: "Stopping double bookings",
