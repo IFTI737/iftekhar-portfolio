@@ -294,7 +294,7 @@ export default function Home() {
                 <span>something.</span>
               </h2>
               <p className="sec-lede" style={{ marginBottom: 30 }}>
-                I&apos;m looking for an internship in full-stack or AI. Call, message on WhatsApp, or send an email — I usually reply the same day.
+                I&apos;m open to internships and full-time roles in full-stack or AI. Call, message on WhatsApp, or send an email — I usually reply the same day.
               </p>
               <ContactList />
             </Reveal>

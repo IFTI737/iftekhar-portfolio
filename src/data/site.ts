@@ -246,6 +246,16 @@ export type Project = {
   repoNote?: string;
   /** Extra buttons on the details page, e.g. API docs or the server repo. */
   extraLinks?: { label: string; href: string }[];
+  /** What I personally did on the project. */
+  myRole?: string[];
+  /** Label for the live link button (default "Live project"). */
+  liveLabel?: string;
+  /** Stages of the project, e.g. a live prototype and the platform in development. */
+  versions?: { label: string; status: string; live?: boolean; text: string; points: string[] }[];
+  /** A YouTube video shown on the details page. */
+  video?: { youtubeId: string; title: string; caption: string };
+  /** System architecture, grouped by layer. */
+  architecture?: { title: string; layer: string; items: string[] }[];
   challenges: { title: string; text: string }[];
   future: string[];
 };
@@ -254,7 +264,7 @@ export const projects: Project[] = [
   {
     slug: "visionguard",
     name: "VisionGuard",
-    tagline: "An AI digital watcher for the cameras a building already has",
+    tagline: "An AI Digital Watcher that turns existing cameras into a 24/7 watcher",
     category: "AI · Computer Vision · Embedded IoT",
     image: "/projects/visionguard.jpg",
     imageSize: [1192, 611],
@@ -263,49 +273,97 @@ export const projects: Project[] = [
       {
         src: "/projects/visionguard-alerts.jpg",
         size: [1272, 544],
-        alt: "VisionGuard alerts list with risk scores and reasons",
-        caption: "Alerts with a risk score and the reasons behind it. Marking each one real or false alarm is how the system learns.",
+        alt: "VisionGuard v1 alerts list with risk scores and reasons",
+        caption: "v1 prototype: alerts with a risk score and the reasons behind it. Marking each one real or false alarm is how the system learns.",
       },
       {
         src: "/projects/visionguard-telegram.jpg",
         size: [410, 778],
         alt: "Telegram alert from VisionGuard showing six people in a restricted zone",
-        caption: "A real Telegram alert: six people detected inside a restricted zone during restricted hours.",
+        caption: "v1 prototype: a real Telegram alert, six people detected inside a restricted zone during restricted hours.",
       },
     ],
     year: "2026",
-    role: "Creator & team lead — architecture and frontend",
-    stack: ["Next.js", "TypeScript", "YOLOv8n", "ONNX Runtime Web", "WebRTC", "Telegram Bot API", "Vercel"],
+    role: "Creator & team lead — product, system design and architecture",
+    myRole: [
+      "Created VisionGuard and lead the team behind it.",
+      "Designed the product and the full system architecture: from camera input to rules, incidents and alerts that escalate until a person responds.",
+      "Planned the roadmap and took the project to the Grameenphone Future Maker 2026 semi-finals.",
+      "Built the v1 prototype web app with in-browser detection, zones, risk scoring and Telegram alerts.",
+    ],
+    versions: [
+      {
+        label: "v1 · Prototype",
+        status: "Live",
+        live: true,
+        text: "A working prototype that runs in the browser — the version in the live demo.",
+        points: [
+          "Person detection with YOLOv8n running in the browser through ONNX Runtime",
+          "Owner-drawn restricted zones with active hours",
+          "Dynamic risk score, with Telegram alerts that include a snapshot and the reasons",
+          "Live phone or IP camera over WebRTC, with a TURN relay fallback",
+        ],
+      },
+      {
+        label: "v2 · Digital Watcher platform",
+        status: "In development",
+        text: "One platform for any place — homes, farms, shops, women's hostels and construction sites — set up by the owner in minutes.",
+        points: [
+          "Backend “brain” (rules, incidents, alerts, call chain, team roles, billing, reports): built and tested",
+          "Dashboard for owners and guards: being built next",
+          "AI models for people, animals and safety gear: training on our own datasets",
+          "Voice assistant: planned · Face recognition: later version",
+        ],
+      },
+    ],
+    video: {
+      youtubeId: "1HWkm70xUuE",
+      title: "VisionGuard Digital Watcher — Concept Film",
+      caption: "Concept film of the v2 platform. The screens are designed visuals of the planned product, not a recording of the running software — see the live v1 prototype for that.",
+    },
+    architecture: [
+      { title: "Frontend", layer: "Next.js · React", items: ["Customer dashboard", "Admin dashboard", "Camera client"] },
+      { title: "Backend", layer: "NestJS", items: ["Modular REST APIs", "WebSocket gateway", "Auth & role-based access", "Rule engine", "Incident & alert services"] },
+      { title: "Data & processing", layer: "PostgreSQL · Redis", items: ["PostgreSQL + TypeORM", "Redis + BullMQ queues", "Background & scheduled jobs", "Materialized views for reports"] },
+      { title: "AI", layer: "Python · PyTorch", items: ["YOLOv8n detection (people, animals)", "Custom models for safety gear", "Detections sent as structured readings"] },
+    ],
+    stack: ["Next.js", "TypeScript", "NestJS", "PostgreSQL", "Redis + BullMQ", "WebSockets", "YOLOv8n", "ONNX Runtime Web", "WebRTC", "Telegram Bot API"],
     description:
-      "VisionGuard is a real-time, proactive CCTV intelligence platform that turns the ordinary cameras of a residential building into intelligent security and safety monitoring. It plugs into the building's existing DVR/NVR, so residents change nothing about their setup — they only connect their system. Instead of plain motion alerts, it warns the owner only when the risk is real, using context: who, what, where and when. It was a semi-finalist at Grameenphone Future Maker 2026.",
+      "Most places already have CCTV, but cameras only record: no one watches every screen day and night, so theft or an intrusion is usually found the next morning. VisionGuard turns those existing cameras into a Digital Watcher. The owner connects their cameras or DVR/NVR, picks the place type, draws zones and chooses ready-made rules. The AI only reports what it sees; VisionGuard decides what it means — a person on the rooftop at night, fewer cows in the shed than expected, a worker without a helmet — and keeps alerting people until someone responds. It was a semi-finalist at Grameenphone Future Maker 2026.",
     features: [
-      "Person detection with YOLOv8n running right in the browser through ONNX Runtime",
-      "Owner-drawn polygon zones with restricted hours",
-      "A rule-based risk score, with Telegram alerts that include a snapshot and the reasons",
-      "Live phone camera over WebRTC, with a TURN relay fallback",
-      "Areas, alerts and settings, with setup import/export",
+      "Works with existing cameras and recorders — nothing new to buy, no technician needed",
+      "Smart rules, not just motion: counts, zones and time rules for people, animals and safety gear",
+      "Waits before alarming, and joins repeated events into one incident with a risk score",
+      "Escalation: app alert, then Telegram, then phone calls one by one until someone says “I am on it”",
+      "Evidence for every incident: snapshots and a video clip shared through expiring links",
     ],
     live: "https://visionguard-ui-three.vercel.app/",
+    liveLabel: "Live prototype (v1)",
     repo: "https://github.com/IFTI737/visionguard-ui",
     challenges: [
       {
+        title: "Alerts people can trust",
+        text: "Motion alarms cry wolf, so owners stop listening. A rule must stay broken for a set time before VisionGuard raises an alarm, and repeated events join one incident instead of flooding the phone.",
+      },
+      {
+        title: "Making sure someone responds",
+        text: "A notification is easy to miss at 2 am. The alert chain moves from the app to Telegram to phone calls, one person after another, and stops the moment anyone confirms.",
+      },
+      {
         title: "Zero-change installation",
-        text: "Most AI camera products ask you to buy new cameras. Designing around existing DVR/NVR systems meant planning for many stream formats and keeping the cost low for residents.",
+        text: "Most AI camera products ask you to buy new cameras. Designing around existing DVR/NVR systems meant planning for many stream formats and keeping the cost low for families and small farms.",
       },
       {
         title: "AI without a server GPU",
-        text: "To keep it cheap, detection runs in the visitor's browser with YOLOv8n on ONNX Runtime. That meant a small model, careful frame sampling, and a hybrid plan where an edge gateway does fast checks and sends only key frames to cloud AI.",
-      },
-      {
-        title: "Streaming a phone camera reliably",
-        text: "WebRTC works well until a network blocks peer-to-peer traffic, so I added a TURN relay fallback to keep the live feed running.",
+        text: "To keep v1 cheap, detection runs in the visitor's browser with YOLOv8n on ONNX Runtime — a small model and careful frame sampling, with heavier models planned for the v2 pipeline.",
       },
     ],
     future: [
-      "A gateway with Frigate NVR, go2rtc and MQTT to connect real DVR/NVR cameras",
-      "Child-safety zones and face recognition (known vs. unknown)",
-      "Weapon detection with a custom YOLO model",
-      "Loitering and climbing detection using tracking, plus a multi-signal context engine",
+      "Finish the v2 dashboard and connect it to the tested backend",
+      "Train our own models for people, animals, helmets and safety vests",
+      "Voice assistant: ask “is anyone on the rooftop?” and hear spoken alerts",
+      "Face recognition for known vs. unknown people",
+      "Grow into a subscription service for homes, farms and shops in Bangladesh",
     ],
   },
   {

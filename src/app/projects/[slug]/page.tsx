@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/site";
 import Icon from "@/components/Icon";
 import LoadImg from "@/components/LoadImg";
+import LiteYouTube from "@/components/LiteYouTube";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -32,7 +33,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       <p className="pd-tag">{p.tagline}</p>
       <div className="hero-actions" style={{ marginTop: 0 }}>
         <a className="btn btn-primary" href={p.live} target="_blank" rel="noopener">
-          Live project
+          {p.liveLabel ?? "Live project"}
           <span className="dot"><Icon name="arrow" size={18} /></span>
         </a>
         {p.repo ? (
@@ -71,6 +72,41 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         <div><small>Type</small>{p.category}</div>
       </div>
 
+      {p.myRole && (
+        <section className="pd-grid">
+          <h2>My role</h2>
+          <ul className="ticks">{p.myRole.map((m) => <li key={m}>{m}</li>)}</ul>
+        </section>
+      )}
+
+      {p.versions && (
+        <section className="pd-grid">
+          <h2>Where it stands</h2>
+          <div className="versions">
+            {p.versions.map((v) => (
+              <div key={v.label} className="version">
+                <div className="version-head">
+                  <h3>{v.label}</h3>
+                  <span className={`status ${v.live ? "is-live" : ""}`}>{v.status}</span>
+                </div>
+                <p>{v.text}</p>
+                <ul className="ticks">{v.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {p.video && (
+        <section className="pd-grid">
+          <h2>Concept film</h2>
+          <figure className="pd-video">
+            <LiteYouTube id={p.video.youtubeId} title={p.video.title} />
+            <figcaption>{p.video.caption}</figcaption>
+          </figure>
+        </section>
+      )}
+
       <section className="pd-grid">
         <h2>Tech stack</h2>
         <div className="stack">{p.stack.map((s) => <span key={s}>{s}</span>)}</div>
@@ -83,6 +119,21 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <ul className="ticks">{p.features.map((f) => <li key={f}>{f}</li>)}</ul>
         </div>
       </section>
+
+      {p.architecture && (
+        <section className="pd-grid">
+          <h2>Architecture</h2>
+          <div className="arch">
+            {p.architecture.map((a) => (
+              <div key={a.title}>
+                <h3>{a.title}</h3>
+                <small className="mono">{a.layer}</small>
+                <ul>{a.items.map((it) => <li key={it}>{it}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="pd-grid">
         <h2>Challenges I faced</h2>
