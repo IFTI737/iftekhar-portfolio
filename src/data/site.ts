@@ -9,12 +9,21 @@ export const profile = {
   shortName: "Iftekhar",
   nickname: "Ifti",
   designation: "Full-Stack & AI Developer",
-  secondary: "Computer Vision, NLP & Scalable Web Systems",
+  specialty: "specializing in computer vision and NLP",
+  /** Shown on the REC line above the name: the most useful fact for a recruiter. */
+  availability: "Open to internships & full-time roles",
   location: "Dhaka, Bangladesh",
   timezone: "Asia/Dhaka",
-  status: "Open to internships",
+  /** Plain-text summary, used for search results and link previews. */
   intro:
-    "I build and deploy complete products, from web backends and live apps to the AI models behind them. Creator of VisionGuard, a real-time AI security platform that turns existing CCTV cameras into a proactive watcher.",
+    "Full-Stack & AI Developer in Dhaka. I build complete products — the web app, the API and the AI model behind it — including VisionGuard, Bangla Sentiment Pro and StudioSpace.",
+  /** Hero paragraph: one line on what I do, then real projects as proof (each links to its page). */
+  introLead: "I build complete products: the web app, the API and the AI model behind it. Recent work:",
+  highlights: [
+    { slug: "visionguard", name: "VisionGuard", text: "AI CCTV security, Grameenphone Future Maker 2026 semi-finalist" },
+    { slug: "bangla-sentiment-pro", name: "Bangla Sentiment Pro", text: "Bangla & Banglish NLP on models I fine-tuned" },
+    { slug: "studiospace", name: "StudioSpace", text: "a full-stack booking marketplace" },
+  ],
   // Put your photo at /public/me.jpg and change this to "/me.jpg"
   photo: "/me-web.jpg" as string | null,
   // Casual photo shown in the About section
@@ -84,7 +93,7 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "MongoDB", level: 4 },
       { name: "PostgreSQL", level: 3 },
       { name: "FastAPI", level: 3 },
-      { name: "Auth & REST APIs", level: 4 },
+      { name: "Auth (JWT, OAuth) & REST APIs", level: 4 },
     ],
   },
   {
@@ -96,6 +105,7 @@ export const skillGroups: { title: string; blurb: string; skills: Skill[] }[] = 
       { name: "YOLO / RT-DETR", level: 4 },
       { name: "Hugging Face Transformers", level: 4 },
       { name: "ONNX Runtime (browser)", level: 3 },
+      { name: "Model evaluation", level: 4 },
       { name: "Explainable AI (Grad-CAM++)", level: 3 },
       { name: "OpenCV", level: 4 },
       { name: "scikit-learn", level: 3 },
@@ -124,9 +134,9 @@ export const education = [
   {
     degree: "BSc in Computer Science and Engineering",
     school: "American International University-Bangladesh (AIUB)",
-    period: "2023 – Present",
+    period: "2023 – 2027 (expected)",
     detail:
-      "CGPA 3.79/4.00 with Dean's List Honors. Final semester (internship remaining).",
+      "CGPA 3.79/4.00 with Dean's List Honors. Coursework completes in 2026; the mandatory internship follows.",
   },
   {
     degree: "Higher Secondary Certificate (Science)",
@@ -159,6 +169,22 @@ export const experience = [
     points: [
       "Hands-on course covering HTML, CSS, JavaScript, React, Next.js, TypeScript, Express and MongoDB.",
       "Built StudioSpace (client and server) and Dev Stack as course projects.",
+    ],
+  },
+  {
+    role: "Team leader — university course projects",
+    org: "American International University-Bangladesh (AIUB)",
+    period: "2023 – 2026",
+    points: [
+      "Led the team in every course project at AIUB: split the work, coordinated members, managed deadlines and led the presentations.",
+    ],
+  },
+  {
+    role: "Volunteer — Feni flood relief",
+    org: "Community work · Feni, Bangladesh",
+    period: "2024",
+    points: [
+      "Delivered food and supplies to remote areas during the 2024 floods, and guided other relief groups to communities they didn't know.",
     ],
   },
   {
@@ -308,7 +334,7 @@ export const projects: Project[] = [
     features: [
       "Analyze one sentence: sentiment, all six emotion scores and word highlighting",
       "Mood journal: write message by message and watch a chart follow the mood",
-      "Bulk CSV: up to 2,000 rows with charts, filters and a labelled CSV download",
+      "Bulk CSV (e.g. product reviews, customer feedback): up to 2,000 rows with charts, filters and a labelled CSV download",
       "YouTube: paste a video link and analyze its top comments",
       "Voice input, dark/light themes, and a live API playground with cURL, JavaScript and Python",
     ],
@@ -402,10 +428,10 @@ export const projects: Project[] = [
 
 export const sections = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];

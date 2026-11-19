@@ -45,23 +45,31 @@ export default function Home() {
             <span className="hide-sm">Scroll to explore</span>
             <span>
               <i className="live-dot" />
-              {profile.location} — {profile.status}
+              {profile.location}
             </span>
           </div>
 
           <div className="hero-grid">
             <div>
               <div className="rec mono fade-in">
-                <i /> REC · {profile.designation}
+                <i /> REC · {profile.availability}
               </div>
               <h1 className="display hero-name" aria-label={profile.name}>
                 <span className="line"><span>{first}</span></span>
                 <span className="line"><span>{rest.join(" ")}</span></span>
               </h1>
               <p className="designation fade-in" style={{ animationDelay: ".3s" }}>
-                {profile.designation} <em>& {profile.secondary}</em>
+                {profile.designation} <em>{profile.specialty}</em>
               </p>
-              <p className="hero-intro fade-in" style={{ animationDelay: ".4s" }}>{profile.intro}</p>
+              <p className="hero-intro fade-in" style={{ animationDelay: ".4s" }}>
+                {profile.introLead}{" "}
+                {profile.highlights.map((h, i) => (
+                  <span key={h.slug}>
+                    <Link href={`/projects/${h.slug}`} className="intro-link">{h.name}</Link>, {h.text}
+                    {i < profile.highlights.length - 2 ? "; " : i === profile.highlights.length - 2 ? "; and " : "."}
+                  </span>
+                ))}
+              </p>
               <div className="fade-in" style={{ animationDelay: ".5s" }}>
                 <Socials />
               </div>
@@ -100,44 +108,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ABOUT ── */}
-      <section id="about" className="section">
-        <div className="wrap">
-          <SectionHead n="02" label="About me" title="A builder who likes real problems." />
-          <div className="about-grid">
-            <Reveal className="about-side">
-              {profile.aboutPhoto && (
-                <figure className="about-photo skel">
-                  <LoadImg src={profile.aboutPhoto} alt={`${profile.name}, off the clock`} width={900} height={1125} loading="lazy" />
-                </figure>
-              )}
-              <dl className="facts">
-                {about.facts.map((f) => (
-                  <div key={f.k}>
-                    <dt>{f.k}</dt>
-                    <dd>{f.v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-            <Reveal className="about-body" delay={120}>
-              <p className="statement">{about.statement}</p>
-              <h3>My journey</h3>
-              {about.journey.map((p, i) => <p key={i}>{p}</p>)}
-              <h3>The work I enjoy</h3>
-              <p>{about.work}</p>
-              <h3>Outside programming</h3>
-              <p>{about.outside}</p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
       {/* ── SKILLS ── */}
       <section id="skills" className="section" style={{ background: "var(--bg-2)" }}>
         <div className="wrap">
           <SectionHead
-            n="03"
+            n="02"
             label="Skills"
             title="What I work with."
             lede="Full-stack web is my main craft. AI and computer vision are where my research lives."
@@ -171,7 +146,7 @@ export default function Home() {
       {/* ── EDUCATION ── */}
       <section id="education" className="section">
         <div className="wrap">
-          <SectionHead n="04" label="Education" title="Where I learned." />
+          <SectionHead n="03" label="Education" title="Where I learned." />
           <div className="timeline">
             {education.map((e) => (
               <Reveal key={e.degree} className="tl-item">
@@ -191,10 +166,10 @@ export default function Home() {
       <section id="experience" className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <SectionHead
-            n="05"
+            n="04"
             label="Experience"
             title="What I've done."
-            lede="Competitions, research and hands-on training — the work that taught me the most."
+            lede="Competitions, leadership, training and community work — the things that taught me the most."
           />
           <div className="timeline">
             {experience.map((x) => (
@@ -210,6 +185,7 @@ export default function Home() {
           </div>
           <Reveal>
             <h3 className="sub-head">Research</h3>
+            <p className="sub-lede">Undergraduate research under faculty supervision at AIUB.</p>
             <div className="research">
               {research.map((r) => (
                 <div key={r.title}>
@@ -239,7 +215,7 @@ export default function Home() {
       <section id="projects" className="section" style={{ background: "var(--bg-2)", overflow: "hidden" }}>
         <div className="wrap">
           <SectionHead
-            n="06"
+            n="05"
             label="Projects"
             title="Things I've shipped."
             lede="Hover a card to pull it out of the deck. Open one to see the stack, the challenges and what comes next."
@@ -269,6 +245,39 @@ export default function Home() {
               <span className="muted">and keeps working after the demo.</span>
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ── ABOUT ── */}
+      <section id="about" className="section">
+        <div className="wrap">
+          <SectionHead n="06" label="About me" title="A builder who likes real problems." />
+          <div className="about-grid">
+            <Reveal className="about-side">
+              {profile.aboutPhoto && (
+                <figure className="about-photo skel">
+                  <LoadImg src={profile.aboutPhoto} alt={`${profile.name}, off the clock`} width={900} height={1125} loading="lazy" />
+                </figure>
+              )}
+              <dl className="facts">
+                {about.facts.map((f) => (
+                  <div key={f.k}>
+                    <dt>{f.k}</dt>
+                    <dd>{f.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+            <Reveal className="about-body" delay={120}>
+              <p className="statement">{about.statement}</p>
+              <h3>My journey</h3>
+              {about.journey.map((p, i) => <p key={i}>{p}</p>)}
+              <h3>The work I enjoy</h3>
+              <p>{about.work}</p>
+              <h3>Outside programming</h3>
+              <p>{about.outside}</p>
+            </Reveal>
+          </div>
         </div>
       </section>
 

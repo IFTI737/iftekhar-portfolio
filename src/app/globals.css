@@ -527,3 +527,17 @@ img.limg { transition: opacity .5s ease; }
 .refs .ref-role { margin: 0; color: var(--text-2); font-size: 15px; }
 .refs .ref-org { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
 @media (max-width: 760px) { .refs { grid-template-columns: 1fr; } }
+
+/* ── Hero intro: project names as links ── */
+.intro-link { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px; text-underline-offset: 4px; transition: color .25s; }
+.intro-link:hover { color: var(--accent); }
+.sub-lede { margin: -8px 0 18px; color: var(--muted); font-size: 15px; }
+#contact { border-top: 1px solid var(--line); }
+
+/* hero: title on one line, specialty on the next */
+.designation { margin-bottom: 18px; line-height: 1.3; }
+.designation em { display: block; font-size: .78em; margin-top: 4px; }
+/* REC line: keep the dot on the first line when the text wraps */
+.rec { align-items: flex-start; }
+.rec i { margin-top: .42em; }
